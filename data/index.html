@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100vh;">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sail Drone</title>
+</head>
+<body style="display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr 1fr 1fr; height: 100%; overflow: hidden; touch-action: manipulation; font-family: monospace;">
+
+    <div style="margin: auto; text-align: center;">
+        <div>Sail</div>
+
+        <label id="sailLabel" style="font-size: 2rem; display: block;"></label>
+    </div>
+    <div style="margin: auto; text-align: center;">
+        <div>Rudder</div>
+        <label id="rudderLabel" style="font-size: 2rem; display: block;"></label>
+    </div>
+
+    <div style="margin: auto;">
+        <button style="padding: 1rem; font-size: 1.5rem;" id="sailDec">&lt;</button>
+        &ThickSpace; 
+        <button style="padding: 1rem; font-size: 1.5rem;" id="sailCent">|</button>
+        &ThickSpace; 
+        <button style="padding: 1rem; font-size: 1.5rem;" id="sailInc">&gt;</button>
+    </div>
+    
+    <div style="margin: auto;">
+        <button style="padding: 1rem; font-size: 1.5rem;" id="rudderDec">&lt;</button>
+        &ThickSpace;
+        <button style="padding: 1rem; font-size: 1.5rem;" id="rudderCent">|</button>
+        &ThickSpace;
+        <button style="padding: 1rem; font-size: 1.5rem;" id="rudderInc">&gt;</button>
+    </div>
+
+    <input id="sailInput" style="width: 40vw; margin: auto;" type="range" name="sail" min="-90" max="90">
+    <input id="rudderInput" style="width: 40vw; margin: auto;" type="range" name="rudder" min="-30" max="30">
+    
+    <script>
+        let sailLabel = document.getElementById('sailLabel');
+        let sailInput = document.getElementById('sailInput');
+        let sailDec = document.getElementById('sailDec');
+        let sailCent = document.getElementById('sailCent');
+        let sailInc = document.getElementById('sailInc');
+        let rudderLabel = document.getElementById('rudderLabel');
+        let rudderInput = document.getElementById('rudderInput');
+        let rudderDec = document.getElementById('rudderDec');
+        let rudderCent = document.getElementById('rudderCent');
+        let rudderInc = document.getElementById('rudderInc');
+
+        sailLabel.innerText = sailInput.value;
+        rudderLabel.innerText = rudderInput.value;
+
+        // TODO: add trim?
+
+        sailInput.addEventListener('change', () => {
+            fetch('/sail', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'text/plain'
+                },
+                body: parseInt(sailInput.value) + 90
+            });
+        });
+        sailInput.addEventListener('input', () => {
+            sailLabel.innerText = sailInput.value;
+        });
+        sailDec.addEventListener('click', () => {
+            sailInput.value = parseInt(sailInput.value) - 1;
+            sailLabel.innerText = sailInput.value;
+            fetch('/sail', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'text/plain'
+                },
+                body: parseInt(sailInput.value) + 90
+            });
+        });
+        sailCent.addEventListener('click', () => {
+            sailInput.value = 0;
+            sailLabel.innerText = sailInput.value;
+            fetch('/sail', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'text/plain'
+                },
+                body: parseInt(sailInput.value) + 90
+            });
+        });
+        sailInc.addEventListener('click', () => {
+            sailInput.value = parseInt(sailInput.value) + 1;
+            sailLabel.innerText = sailInput.value;
+            fetch('/sail', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'text/plain'
+                },
+                body: parseInt(sailInput.value) + 90
+            });
+        });
+
+        rudderInput.addEventListener('change', () => {
+            fetch('/rudder', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'text/plain'
+                },
+                body: parseInt(rudderInput.value) + 90
+            });
+        });
+        rudderInput.addEventListener('input', () => {
+            rudderLabel.innerText = rudderInput.value;
+        });
+        rudderDec.addEventListener('click', () => {
+            rudderInput.value = parseInt(rudderInput.value) - 1;
+            rudderLabel.innerText = rudderInput.value;
+            fetch('/rudder', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'text/plain'
+                },
+                body: parseInt(rudderInput.value) + 90
+            });
+        });
+        rudderCent.addEventListener('click', () => {
+            rudderInput.value = 0;
+            rudderLabel.innerText = rudderInput.value;
+            fetch('/rudder', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'text/plain'
+                },
+                body: parseInt(rudderInput.value) + 90
+            });
+        });
+        rudderInc.addEventListener('click', () => {
+            rudderInput.value = parseInt(rudderInput.value) + 1;
+            rudderLabel.innerText = rudderInput.value;
+            fetch('/rudder', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'text/plain'
+                },
+                body: parseInt(rudderInput.value) + 90
+            });
+        });
+    </script>
+    
+</body>
+</html>
